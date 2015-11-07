@@ -1,0 +1,27 @@
+HT1632C Python Library
+======
+
+A library used to interface with the RaspberryPi and a set of HT1632c Sure Electronic LED Boards.
+
+
+Connection
+----------
+
+Using a Raspberry PI model B2, you need to connect some GPIO pins to the
+LED BR1 port, the input port, like this:
+
+RPI                   SURE
+---                   ----
+GND             6     GND  8
+5V              4     5V   16
+GPIO 10 (MOSI) 19     DATA 7
+GPIO 11 (SCLK) 23     WR   5
+GPIO 8  (CE0)  24     CLK  2
+GPIO 7  (CE1)  26     CS   1
+
+
+Install
+-------
+
+Read INSTALL
+
