@@ -1,5 +1,0 @@
-Jede Schriftart ist in 16 Varianten enthalten:
-- Assembler und C Header
-- Horizontal und Vertikal angeordnete Bits
-- Gespiegelt und ungespiegelt (MSB/LSB first)
-- Links bzw. oben ausgerichtet, rechts bzw. unten ausgerichtet (1/2). Bei Schriftarten die genau in ein Byte passen sind beide Versionen identisch.

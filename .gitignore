@@ -2,3 +2,8 @@
 *.pyc
 *.a
 *.so
+build/
+dist/
+*.egg
+*.egg-info
+.remote-sync.json
