@@ -68,30 +68,10 @@ and execute the following to get an overview about your GPIO connector:
 ht1632 clib
 -----------
 
-Still inside a shell, change to the ht1632 clib directory, like:
-
-`cd ht1632clib`
-
-Have a look at the file panelconfig.h, if you own a SURE electronics
-32-16 Bicolor LED matrix display, no need to change anything. Else
-you need to adapt some constants here, to match your display type and
-chip selection pins.
-
-NOTE: the compiled ht1632 clib will match and work for that configured
-      board only.
-
-Execute the following command to compile the library:
-
-`make`
-
-The library is now ready to be used, before being able to actually
-talk to the LED matrix, you need to load the wiringPi spi extension like:
-
-`gpio load spi`
+`sudo python setup.py install`
 
 
 Examples
 ---------------
 
-Once you have done the above, try out one of the examples in the src directory. Depending on where 
-the ht1632clib-py.so file is located you may need to adjust the `PATH_TO_SO` variable in ht1632c.py file.
+Once you have done the above, try out one of the examples in the src directory.
