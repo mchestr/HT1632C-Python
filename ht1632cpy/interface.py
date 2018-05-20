@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
+import logging
 import os
-import inspect
 from ctypes import *
+
+from ht1632cpy import font_helper
+
+LOG = logging.getLogger(__name__)
 
 
 # utility
-def encodeStr(s):
+def _encode_str(s):
     return c_char_p(s.encode("cp437", "ignore"))
 
 
@@ -57,7 +61,7 @@ class HT1632C(object):
         self.lib.ht1632c_fontheight.argtypes = [c_void_p]
         self.lib.ht1632c_fontheight.restype = c_int
 
-        print("Initializing HT1632C")
+        LOG.info("Initializing HT1632C")
         if self.lib.ht1632c_init(num_panels, rotation) != 0:
             raise IOError("Could not init display")
 
@@ -71,6 +75,8 @@ class HT1632C(object):
         self.font8x12 = self.lib.font_8x12
         self.font12x16 = self.lib.font_12x16
         self.font4x6sym = self.lib.font_4x6_sym
+
+        self.pyfont = font_helper.PyFontHelper(self)
 
     def close(self):
         self.lib.ht1632c_close()
@@ -106,22 +112,28 @@ class HT1632C(object):
         self.lib.ht1632c_box(x0, y0, x1, y1, color)
 
     def putchar(self, x, y, c, font, color, bg):
+        if hasattr(font, 'get'):
+            return self.pyfont.putchar(x, y, c, font, color, bg)
         return self.lib.ht1632c_putchar(x, y, c, font, color, bg)
 
     def putchar_metric(self, x, y, c, font, color, bg):
         return self.lib.ht1632c_putchar_metric(x, y, c, font, color, bg)
 
     def putstr(self, x, y, s, font, color, bg):
-        return self.lib.ht1632c_putstr(x, y, encodeStr(s), font, color, bg)
+        if hasattr(font, 'get'):
+            return self.pyfont.putstr(x, y, s, font, color, bg)
+        return self.lib.ht1632c_putstr(x, y, _encode_str(s), font, color, bg)
 
     def putstr_metric(self, x, y, s, font, color, bg):
-        return self.lib.ht1632c_putstr_metric(x, y, encodeStr(s), font, color, bg)
+        return self.lib.ht1632c_putstr_metric(x, y, _encode_str(s), font, color, bg)
 
     def charwidth(self, c, font):
+        if hasattr(font, 'get'):
+            return self.pyfont.charwidth(c, font)
         return self.lib.ht1632c_charwidth(c, font)
 
     def strwidth(self, s, font):
-        return self.lib.ht1632c_strwidth(encodeStr(s), font)
+        return self.lib.ht1632c_strwidth(_encode_str(s), font)
 
     def fontwidth(self, font):
         return self.lib.ht1632c_fontwidth(font)

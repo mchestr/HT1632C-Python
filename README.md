@@ -61,3 +61,34 @@ git pull origin
 ## Examples
 
 Once you have done the above, try out one of the examples.
+
+
+## Custom Fonts
+
+There is an experimental feature that is not fully tested that allows you to create 
+your own fonts if you prefer. If all you need is `putstr()` or `putchar()` it should work fine.
+
+To define your own font you must define a hashmap for each character you wish to print.
+There is currently an example in `examples/custom_font.py` which sort of mimics the font_6x8 font defined in the interface.
+
+To define a character bitmap the library will read top to bottom, left to right, for example:
+
+```python
+bitmap = {
+    'A': [0x7E, 0x88, 0x88, 0x88, 0x7E],
+}
+
+#  0x7E 0x88 0x88 0x88 0x7E
+#   0    1    1    1    0
+#   1    0    0    0    1
+#   1    0    0    0    1
+#   1    0    0    0    1
+#   1    1    1    1    1
+#   1    0    0    0    1
+#   1    0    0    0    1
+#   0    0    0    0    0
+```
+
+The `putstr` can take in iterable, so if you have a custom symbol that is multiple characters, 
+you could do something like `interface.putstr(0, 0, ['symbol', 'h', 'e', 'l', 'l', 'o'])`
+
