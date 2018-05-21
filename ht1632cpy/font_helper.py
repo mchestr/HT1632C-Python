@@ -30,7 +30,7 @@ class PyFontHelper(object):
     def charwidth(self, c, font):
         width = 0
         char_bitmap = font.get(c)
-        if c is None:
+        if char_bitmap is None:
             LOG.warning("character '%s' not found in font bitmap", c)
             return width
         return len(char_bitmap)
