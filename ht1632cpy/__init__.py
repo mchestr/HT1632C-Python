@@ -97,7 +97,7 @@ class HT1632C(object):
         try:
             for chip in range(self.__num_chips):
                 self._chip_select(chip + 1)
-                data = bytes([self.ID_WR << (8 - self.ID_LEN), 0x00] + [0xff] * 32)
+                data = bytes([self.ID_WR << (8 - self.ID_LEN), 0x00] + [0x00] * 32)
                 self._send(data)
                 self._chip_select(self.CS_NONE)
         finally:

@@ -4,6 +4,7 @@ from ht1632cpy import HT1632C
 # Example turns on LEDs and cycles through the colors.
 interface = HT1632C(2, 0)
 interface.pwm(15)
+interface.clear()
 
 # # Green
 # print("GREEN")
